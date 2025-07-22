@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { cn } from "@/lib/utils";
 
 interface CopyButtonProps {
   text: string;
@@ -21,17 +20,21 @@ export function CopyButton({ text, className }: CopyButtonProps) {
     }
   };
 
+  const buttonClassName = [
+    "absolute top-2 right-2 px-2 py-1 text-xs font-medium",
+    "bg-gray-800 text-gray-200 rounded border border-gray-600",
+    "hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500",
+    "transition-all duration-200",
+    copied ? "bg-green-600 hover:bg-green-600" : "",
+    className || "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <button
       onClick={handleCopy}
-      className={cn(
-        "absolute top-2 right-2 px-2 py-1 text-xs font-medium",
-        "bg-gray-800 text-gray-200 rounded border border-gray-600",
-        "hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500",
-        "transition-all duration-200",
-        copied && "bg-green-600 hover:bg-green-600",
-        className,
-      )}
+      className={buttonClassName}
       aria-label="Copy code to clipboard"
     >
       {copied ? "Copied!" : "Copy"}

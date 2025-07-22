@@ -2,7 +2,6 @@
 
 import React, { useRef } from "react";
 import { CopyButton } from "@/components/mdx/copy-button";
-import { cn } from "@/lib/utils";
 
 interface CodeBlockProps extends React.HTMLAttributes<HTMLElement> {
   children?: React.ReactNode;
@@ -21,7 +20,12 @@ export function CodeBlock({ className, children, ...props }: CodeBlockProps) {
 
   return (
     <div className="relative group">
-      <pre ref={preRef} data-line-numbers className={cn(className)} {...props}>
+      <pre
+        ref={preRef}
+        data-line-numbers
+        className={className}
+        {...props}
+      >
         {children}
       </pre>
       <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">

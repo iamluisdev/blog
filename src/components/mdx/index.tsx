@@ -5,8 +5,8 @@ import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { createHeading } from "@/components/mdx/heading";
 import { CodeBlock } from "@/components/mdx/code-block";
-import rehypePrettyCode from "rehype-pretty-code";
 import remarkFootnotes from "remark-footnotes";
+import { MarkdownAlert, Highlight } from "@/components/mdx/markdown-alert";
 
 import { cn } from "@/lib/utils";
 
@@ -72,6 +72,8 @@ let components = {
     <CodeBlock className={cn(styles.pre)} {...props} />
   ),
   Table,
+  MarkdownAlert,
+  Highlight,
 };
 
 export function CustomMDX(props) {
