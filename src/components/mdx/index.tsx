@@ -1,13 +1,11 @@
 import React, { ComponentPropsWithoutRef } from "react";
-
+import rehypeShiki from "@shikijs/rehype";
 import Link from "next/link";
 import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { createHeading } from "@/components/mdx/heading";
 import { CodeBlock } from "@/components/mdx/code-block";
-import rehypePrettyCode, {
-  Options as rehypePrettyCodeOptions,
-} from "rehype-pretty-code";
+import rehypePrettyCode from "rehype-pretty-code";
 import remarkFootnotes from "remark-footnotes";
 
 import { cn } from "@/lib/utils";
@@ -76,11 +74,6 @@ let components = {
   Table,
 };
 
-let options: rehypePrettyCodeOptions;
-options = {
-  theme: "github-dark",
-};
-
 export function CustomMDX(props) {
   return (
     <MDXRemote
@@ -89,7 +82,19 @@ export function CustomMDX(props) {
       options={{
         mdxOptions: {
           remarkPlugins: [remarkFootnotes],
-          rehypePlugins: [[rehypePrettyCode, options]],
+          rehypePlugins: [
+            [
+              rehypeShiki,
+              {
+                themes: {
+                  light: "github-light",
+                  dark: "github-dark",
+                },
+                addLanguageClass: true,
+                defaultColor: false,
+              },
+            ],
+          ],
         },
       }}
     />

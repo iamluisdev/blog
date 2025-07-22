@@ -7,6 +7,7 @@
 
 html {
   color-scheme: light dark;
+  min-width: 360px;
   background-color: #fafafa;
 }
 
@@ -15,10 +16,6 @@ html {
     color-scheme: dark;
     background-color: #18181b;
   }
-}
-
-html {
-  min-width: 360px;
 }
 
 .prose .anchor {
@@ -109,15 +106,6 @@ html {
   margin-bottom: 1.25em !important;
 }
 
-pre::-webkit-scrollbar {
-  display: none;
-}
-
-pre {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
 /* Remove Safari input shadow on mobile */
 input[type="text"],
 input[type="email"] {
@@ -135,4 +123,23 @@ table {
 
 .title {
   text-wrap: balance;
+}
+
+@media (prefers-color-scheme: dark) {
+  pre code span {
+    color: var(--shiki-dark) !important;
+  }
+  pre {
+    background-color: var(--shiki-dark-bg) !important;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  pre code span {
+    color: var(--shiki-light) !important;
+  }
+  
+  pre {
+    background-color: var(--shiki-light-bg) !important;
+  }
 }

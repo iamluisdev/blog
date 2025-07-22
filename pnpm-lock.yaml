@@ -78,6 +78,9 @@ importers:
         specifier: 5.4.5
         version: 5.4.5
     devDependencies:
+      '@shikijs/rehype':
+        specifier: 3.8.1
+        version: 3.8.1
       '@testing-library/dom':
         specifier: ^10.4.0
         version: 10.4.0
@@ -93,6 +96,9 @@ importers:
       prettier:
         specifier: 3.6.2
         version: 3.6.2
+      shiki:
+        specifier: 3.8.1
+        version: 3.8.1
       vite-tsconfig-paths:
         specifier: ^5.1.4
         version: 5.1.4(typescript@5.4.5)(vite@7.0.5(@types/node@24.0.14)(jiti@2.4.2)(lightningcss@1.30.1)(yaml@2.8.0))
@@ -700,6 +706,9 @@ packages:
 
   '@shikijs/langs@3.8.1':
     resolution: {integrity: sha512-TjOFg2Wp1w07oKnXjs0AUMb4kJvujML+fJ1C5cmEj45lhjbUXtziT1x2bPQb9Db6kmPhkG5NI2tgYW1/DzhUuQ==}
+
+  '@shikijs/rehype@3.8.1':
+    resolution: {integrity: sha512-ERs9IUaORBY8vu3OQfmB1L0nwGey0qhJi3NVSLwl22H+FPIg3dDyi2bHULY7pcyKC2qo5b1yiu5Vf3jp3ZkPvA==}
 
   '@shikijs/themes@3.8.1':
     resolution: {integrity: sha512-Vu3t3BBLifc0GB0UPg2Pox1naTemrrvyZv2lkiSw3QayVV60me1ujFQwPZGgUTmwXl1yhCPW8Lieesm0CYruLQ==}
@@ -2596,6 +2605,15 @@ snapshots:
   '@shikijs/langs@3.8.1':
     dependencies:
       '@shikijs/types': 3.8.1
+
+  '@shikijs/rehype@3.8.1':
+    dependencies:
+      '@shikijs/types': 3.8.1
+      '@types/hast': 3.0.4
+      hast-util-to-string: 3.0.1
+      shiki: 3.8.1
+      unified: 11.0.5
+      unist-util-visit: 5.0.0
 
   '@shikijs/themes@3.8.1':
     dependencies:
