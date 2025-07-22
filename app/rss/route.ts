@@ -1,5 +1,5 @@
-import { baseUrl } from "@/app/sitemap";
-import { getBlogPosts } from "@/lib/utils";
+import { BASE_URL } from "@/lib/constants";
+import { getBlogPosts } from "@/lib/api/blog";
 
 export async function GET() {
   let allBlogs = await getBlogPosts();
@@ -15,7 +15,7 @@ export async function GET() {
       (post) =>
         `<item>
           <title>${post.metadata.title}</title>
-          <link>${baseUrl}/blog/${post.slug}</link>
+          <link>${BASE_URL}/blog/${post.slug}</link>
           <description>${post.metadata.summary || ""}</description>
           <pubDate>${new Date(
             post.metadata.publishedAt,
@@ -28,7 +28,7 @@ export async function GET() {
   <rss version="2.0">
     <channel>
         <title>My Portfolio</title>
-        <link>${baseUrl}</link>
+        <link>${BASE_URL}</link>
         <description>This is my portfolio RSS feed</description>
         ${itemsXml}
     </channel>

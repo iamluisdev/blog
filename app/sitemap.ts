@@ -1,17 +1,18 @@
-import { getBlogPosts } from "@/lib/utils";
+import { getBlogPosts } from "@/lib/api/blog";
+import { BASE_URL } from "@/lib/constants";
 
-export const baseUrl = "https://dev.1chooo.com";
-
-export default async function sitemap() {
+async function sitemap() {
   let blogs = getBlogPosts().map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
+    url: `${BASE_URL}/blog/${post.slug}`,
     lastModified: post.metadata.publishedAt,
   }));
 
   let routes = ["", "/blog"].map((route) => ({
-    url: `${baseUrl}${route}`,
+    url: `${BASE_URL}${route}`,
     lastModified: new Date().toISOString().split("T")[0],
   }));
 
   return [...routes, ...blogs];
 }
+
+export default sitemap;
