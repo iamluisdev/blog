@@ -5,13 +5,14 @@ import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { createHeading } from "@/components/mdx/heading";
 import { CodeBlock } from "@/components/mdx/code-block";
-import rehypePrettyCode, { Options as rehypePrettyCodeOptions } from "rehype-pretty-code";
+import rehypePrettyCode, {
+  Options as rehypePrettyCodeOptions,
+} from "rehype-pretty-code";
 import remarkFootnotes from "remark-footnotes";
 
 import { cn } from "@/lib/utils";
 
 import styles from "@/styles/md.module.css";
-
 
 function Table({ data }) {
   let headers = data.headers.map((header, index) => (
@@ -82,7 +83,9 @@ options = {
 
 export function CustomMDX(props) {
   return (
-    <MDXRemote {...props} components={{ ...components, ...props.components }}
+    <MDXRemote
+      {...props}
+      components={{ ...components, ...props.components }}
       options={{
         mdxOptions: {
           remarkPlugins: [remarkFootnotes],

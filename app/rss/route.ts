@@ -1,42 +1,52 @@
-import { BASE_URL } from "@/lib/constants";
+import RSS from "rss";
+
+import { NextResponse } from "next/server";
+
 import { getBlogPosts } from "@/lib/api/blog";
+import { BASE_URL } from "@/lib/constants";
+
+import type { ItemOptions } from "@/types/rss";
+
+const rssOptions = {
+  title: "Hugo Lin Dev",
+  description: "Hugo Lin's Dev Blog",
+  site_url: "https://dev.1chooo.com",
+  feed_url: "https://dev.1chooo.com/rss",
+  language: "en-US",
+  managingEditor: "hugo@1chooo.com (Chun-Ho Lin)",
+  webMaster: "hugo@1chooo.com (Chun-Ho Lin)",
+  copyright: "© 2025 Chun-Ho (Hugo) Lin",
+  categories: [
+    "Technology",
+    "Software Development",
+    "Web Development",
+    "Programming",
+  ],
+};
 
 export async function GET() {
+  const feed = new RSS(rssOptions);
+
   let allBlogs = await getBlogPosts();
 
-  const itemsXml = allBlogs
-    .sort((a, b) => {
-      if (new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)) {
-        return -1;
-      }
-      return 1;
-    })
-    .map(
-      (post) =>
-        `<item>
-          <title>${post.metadata.title}</title>
-          <link>${BASE_URL}/${post.slug}</link>
-          <description>${post.metadata.summary || ""}</description>
-          <pubDate>${new Date(
-            post.metadata.publishedAt,
-          ).toUTCString()}</pubDate>
-        </item>`,
-    )
-    .join("\n");
+  for (const post of allBlogs) {
+    const { title, publishedAt, summary } = post.metadata;
 
-  const rssFeed = `<?xml version="1.0" encoding="UTF-8" ?>
-  <rss version="2.0">
-    <channel>
-        <title>My Portfolio</title>
-        <link>${BASE_URL}</link>
-        <description>This is my portfolio RSS feed</description>
-        ${itemsXml}
-    </channel>
-  </rss>`;
+    let itemOptions: ItemOptions;
+    itemOptions = {
+      title,
+      url: `${BASE_URL}/${post.slug}`,
+      date: publishedAt,
+      description: summary,
+      author: "Hugo Lin",
+    };
 
-  return new Response(rssFeed, {
+    feed.item(itemOptions);
+  }
+
+  return new NextResponse(feed.xml({ indent: true }), {
     headers: {
-      "Content-Type": "text/xml",
+      "Content-Type": "application/xml",
     },
   });
 }
