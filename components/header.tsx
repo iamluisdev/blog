@@ -10,7 +10,12 @@ function Header() {
             alt="Author avatar image"
             className="h-10 w-10 rounded-full"
           />
-          <svg height="32" width="32" viewBox="0 0 32 32" className="text-neutral-400">
+          <svg
+            height="32"
+            width="32"
+            viewBox="0 0 32 32"
+            className="text-neutral-400"
+          >
             <path d="M22 5L9 28" stroke="#374151"></path>
           </svg>
           <h1 className="text-3xl font-semibold">Dev</h1>
