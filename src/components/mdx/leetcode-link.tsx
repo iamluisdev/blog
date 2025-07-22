@@ -24,7 +24,6 @@ function ArrowIcon() {
 }
 
 function LeetCodeLink({ url, title }: LeetCodeLinkProps) {
-
   if (!url) {
     return null;
   }

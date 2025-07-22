@@ -3,6 +3,6 @@ interface Post {
   publishedAt: string;
   summary: string;
   image?: string;
-};
+}
 
 export type { Post };

@@ -1,12 +1,18 @@
-import type { ReactNode } from "react"
-import { Lightbulb, Info, AlertTriangle, AlertCircle, MessageSquareWarning } from "lucide-react"
-import { cn } from "@/lib/utils"
+import type { ReactNode } from "react";
+import {
+  Lightbulb,
+  Info,
+  AlertTriangle,
+  AlertCircle,
+  MessageSquareWarning,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface MarkdownAlertProps {
-  type: "tip" | "info" | "warning" | "danger" | "important"
-  children: ReactNode
-  title?: string
-  className?: string
+  type: "tip" | "info" | "warning" | "danger" | "important";
+  children: ReactNode;
+  title?: string;
+  className?: string;
 }
 
 const alertConfig = {
@@ -40,29 +46,42 @@ const alertConfig = {
     iconClassName: "text-red-400",
     defaultTitle: "Danger",
   },
-}
+};
 
-function MarkdownAlert({ type, children, title, className }: MarkdownAlertProps) {
-  const config = alertConfig[type]
-  const Icon = config.icon
-  const displayTitle = title || config.defaultTitle
+function MarkdownAlert({
+  type,
+  children,
+  title,
+  className,
+}: MarkdownAlertProps) {
+  const config = alertConfig[type];
+  const Icon = config.icon;
+  const displayTitle = title || config.defaultTitle;
 
   return (
-    <div className={cn("flex gap-3 rounded-xl border p-4 my-4", config.className, className)}>
+    <div
+      className={cn(
+        "flex gap-3 rounded-xl border p-4 my-4",
+        config.className,
+        className,
+      )}
+    >
       <div className="flex-shrink-0 mt-0.5">
         <Icon className={cn("h-5 w-5", config.iconClassName)} />
       </div>
       <div className="flex-1 min-w-0">
-        <div className="font-semibold text-sm mb-2 leading-tight">{displayTitle}</div>
+        <div className="font-semibold text-sm mb-2 leading-tight">
+          {displayTitle}
+        </div>
         <div className="space-y-2 text-sm leading-relaxed">{children}</div>
       </div>
     </div>
-  )
+  );
 }
 
 interface HighlightProps {
-  children: ReactNode
-  variant?: "green" | "blue" | "yellow" | "red" | "purple"
+  children: ReactNode;
+  variant?: "green" | "blue" | "yellow" | "red" | "purple";
 }
 
 function Highlight({ children, variant = "blue" }: HighlightProps) {
@@ -72,11 +91,11 @@ function Highlight({ children, variant = "blue" }: HighlightProps) {
     yellow: "text-yellow-400 font-medium",
     red: "text-red-400 font-medium",
     purple: "text-purple-400 font-medium",
-  }
+  };
 
-  return <span className={variants[variant]}>{children}</span>
+  return <span className={variants[variant]}>{children}</span>;
 }
 
-export { Highlight, MarkdownAlert }
-export type { MarkdownAlertProps, HighlightProps }
-export default MarkdownAlert
+export { Highlight, MarkdownAlert };
+export type { MarkdownAlertProps, HighlightProps };
+export default MarkdownAlert;

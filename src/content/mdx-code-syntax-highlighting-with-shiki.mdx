@@ -1,5 +1,5 @@
 ---
-title: 'MDX Code Syntax Highlighting with Shiki'
+title: "MDX Code Syntax Highlighting with Shiki"
 publishedAt: "2025-07-23"
 summary: "In this post, I'll walk you through how I implemented syntax highlighting for MDX code blocks using Shiki, in combination with next-mdx-remote"
 image: /images/posts/mdx-code-syntax-highlighting-with-shiki/banner.webp
@@ -14,7 +14,16 @@ In this post, I'll walk you through how I implemented syntax highlighting for MD
 First, make sure you've installed all the necessary packages.
 
 <MarkdownAlert type="info">
-  I use [pnpm](https://pnpm.io/) as my package manager. Make sure it's installed before running the commands below. Or you can also use <Highlight variant="blue"><code>npm</code></Highlight> or <Highlight variant="blue"><code>yarn</code></Highlight> instead.
+  I use [pnpm](https://pnpm.io/) as my package manager. Make sure it's installed
+  before running the commands below. Or you can also use{" "}
+  <Highlight variant="blue">
+    <code>npm</code>
+  </Highlight>{" "}
+  or{" "}
+  <Highlight variant="blue">
+    <code>yarn</code>
+  </Highlight>{" "}
+  instead.
 </MarkdownAlert>
 
 ```bash
@@ -203,7 +212,11 @@ Here's how it renders:
 
 ```html
 <div class="relative group">
-  <pre data-line-numbers class="shiki shiki-themes github-light github-dark" style="--shiki-light: #24292e; --shiki-dark: #e1e4e8; --shiki-light-bg: #fff; --shiki-dark-bg: #24292e;">
+  <pre
+    data-line-numbers
+    class="shiki shiki-themes github-light github-dark"
+    style="--shiki-light: #24292e; --shiki-dark: #e1e4e8; --shiki-light-bg: #fff; --shiki-dark-bg: #24292e;"
+  >
     <code class="language-ts">
       <span class="line">
         <span>console.</span>

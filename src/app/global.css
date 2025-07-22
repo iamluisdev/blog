@@ -134,7 +134,7 @@ table {
   pre code span {
     color: var(--shiki-light) !important;
   }
-  
+
   pre {
     background-color: var(--shiki-light-bg) !important;
   }
