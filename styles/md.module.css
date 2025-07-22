@@ -138,3 +138,52 @@
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
 }
+
+/* Footnotes styling */
+.footnotes {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.footnotes ol {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.footnotes li {
+  margin-bottom: 0.5rem;
+}
+
+.footnotes a {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.footnotes a:hover {
+  text-decoration: underline;
+}
+
+.footnote-ref {
+  font-size: 0.875rem;
+  vertical-align: super;
+  color: #3b82f6;
+  text-decoration: none;
+  padding: 0 0.125rem;
+}
+
+.footnote-ref:hover {
+  text-decoration: underline;
+}
+
+/* Dark mode footnotes */
+@media (prefers-color-scheme: dark) {
+  .footnotes {
+    border-top-color: #374151;
+  }
+  
+  .footnotes a,
+  .footnote-ref {
+    color: #60a5fa;
+  }
+}

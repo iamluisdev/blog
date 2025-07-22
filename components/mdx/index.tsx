@@ -6,6 +6,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { createHeading } from "@/components/mdx/heading";
 import { CodeBlock } from "@/components/mdx/code-block";
 import rehypePrettyCode, { Options as rehypePrettyCodeOptions } from "rehype-pretty-code";
+import remarkFootnotes from "remark-footnotes";
 
 import { cn } from "@/lib/utils";
 
@@ -84,6 +85,7 @@ export function CustomMDX(props) {
     <MDXRemote {...props} components={{ ...components, ...props.components }}
       options={{
         mdxOptions: {
+          remarkPlugins: [remarkFootnotes],
           rehypePlugins: [[rehypePrettyCode, options]],
         },
       }}
