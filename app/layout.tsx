@@ -6,10 +6,10 @@ import { Navbar } from "@/components/nav";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Footer from "@/components/footer";
-import { baseUrl } from "@/app/sitemap";
+import { BASE_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(baseUrl),
+  metadataBase: new URL(BASE_URL),
   title: {
     default: "Next.js Portfolio Starter",
     template: "%s | Next.js Portfolio Starter",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "My Portfolio",
     description: "This is my portfolio.",
-    url: baseUrl,
+    url: BASE_URL,
     siteName: "My Portfolio",
     locale: "en_US",
     type: "website",
