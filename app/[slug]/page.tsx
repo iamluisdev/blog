@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import { CustomMDX } from "@/components/mdx";
 import { formatDate, getBlogPosts } from "@/lib/api/blog";
 import { BASE_URL } from "@/lib/constants";
-import Link from "next/link";
 
 export async function generateStaticParams() {
   let posts = getBlogPosts();
@@ -62,7 +61,7 @@ export default async function Blog({ params }) {
   }
 
   return (
-    <section className="mt-16">
+    <section>
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -85,9 +84,6 @@ export default async function Blog({ params }) {
           }),
         }}
       />
-      <Link href="/">
-        <h1 className="font-semibold text-3xl mb-8 tracking-tighter">1chooo</h1>
-      </Link>
       <h1 className="title font-semibold text-2xl tracking-tighter">
         {post.metadata.title}
       </h1>
