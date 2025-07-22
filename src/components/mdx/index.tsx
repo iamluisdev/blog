@@ -7,6 +7,7 @@ import { createHeading } from "@/components/mdx/heading";
 import { CodeBlock } from "@/components/mdx/code-block";
 import remarkFootnotes from "remark-footnotes";
 import { MarkdownAlert, Highlight } from "@/components/mdx/markdown-alert";
+import { LeetCodeLink } from "@/components/mdx/leetcode-link";
 
 import { cn } from "@/lib/utils";
 
@@ -74,6 +75,7 @@ let components = {
   Table,
   MarkdownAlert,
   Highlight,
+  LeetCodeLink,
 };
 
 export function CustomMDX(props) {
