@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { CustomMDX } from "@/components/mdx";
 import { formatDate, getBlogPosts } from "@/lib/api/blog";
 import { BASE_URL } from "@/lib/constants";
+import Link from "next/link";
 
 export async function generateStaticParams() {
   let posts = getBlogPosts();
@@ -11,8 +12,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }) {
-  let post = getBlogPosts().find((post) => post.slug === params.slug);
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  let post = getBlogPosts().find((post) => post.slug === slug);
   if (!post) {
     return;
   }
@@ -35,7 +37,7 @@ export function generateMetadata({ params }) {
       description,
       type: "article",
       publishedTime,
-      url: `${BASE_URL}/blog/${post.slug}`,
+      url: `${BASE_URL}/${post.slug}`,
       images: [
         {
           url: ogImage,
@@ -51,15 +53,16 @@ export function generateMetadata({ params }) {
   };
 }
 
-export default function Blog({ params }) {
-  let post = getBlogPosts().find((post) => post.slug === params.slug);
+export default async function Blog({ params }) {
+  const { slug } = await params;
+  let post = getBlogPosts().find((post) => post.slug === slug);
 
   if (!post) {
     notFound();
   }
 
   return (
-    <section>
+    <section className="mt-16">
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -74,7 +77,7 @@ export default function Blog({ params }) {
             image: post.metadata.image
               ? `${BASE_URL}${post.metadata.image}`
               : `/og?title=${encodeURIComponent(post.metadata.title)}`,
-            url: `${BASE_URL}/blog/${post.slug}`,
+            url: `${BASE_URL}/${post.slug}`,
             author: {
               "@type": "Person",
               name: "My Portfolio",
@@ -82,6 +85,9 @@ export default function Blog({ params }) {
           }),
         }}
       />
+      <Link href="/">
+        <h1 className="font-semibold text-3xl mb-8 tracking-tighter">1chooo</h1>
+      </Link>
       <h1 className="title font-semibold text-2xl tracking-tighter">
         {post.metadata.title}
       </h1>
