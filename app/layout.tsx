@@ -10,16 +10,13 @@ import { Header } from "@/components/header";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: {
-    default: "Next.js Portfolio Starter",
-    template: "%s | Next.js Portfolio Starter",
-  },
-  description: "This is my portfolio.",
+  title: "Hugo Lin Dev",
+  description: "Hugo Lin's Dev Blog",
   openGraph: {
-    title: "My Portfolio",
-    description: "This is my portfolio.",
+    title: "Hugo Lin Dev",
+    description: "Hugo Lin's Dev Blog",
     url: BASE_URL,
-    siteName: "My Portfolio",
+    siteName: "Hugo Lin Dev",
     locale: "en_US",
     type: "website",
   },
@@ -34,6 +31,18 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: [
+      {
+        url: "/favicon.ico",
+        sizes: "192x192",
+        type: "image/x-icon",
+      },
+    ],
+  },
+  manifest: "/manifest.json",
 };
 
 const cx = (...classes) => classes.filter(Boolean).join(" ");
