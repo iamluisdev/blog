@@ -1,8 +1,16 @@
+import React, { ComponentPropsWithoutRef } from "react";
+
 import Link from "next/link";
 import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { highlight } from "sugar-high";
-import React from "react";
+import { createHeading } from "@/components/mdx/heading";
+import { CodeBlock } from "@/components/mdx/code-block";
+import rehypePrettyCode, { Options as rehypePrettyCodeOptions } from "rehype-pretty-code";
+
+import { cn } from "@/lib/utils";
+
+import styles from "@/styles/md.module.css";
+
 
 function Table({ data }) {
   let headers = data.headers.map((header, index) => (
@@ -48,44 +56,6 @@ function RoundedImage(props) {
   return <Image alt={props.alt} className="rounded-lg" {...props} />;
 }
 
-function Code({ children, ...props }) {
-  let codeHTML = highlight(children);
-  return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
-}
-
-function slugify(str) {
-  return str
-    .toString()
-    .toLowerCase()
-    .trim() // Remove whitespace from both ends of a string
-    .replace(/\s+/g, "-") // Replace spaces with -
-    .replace(/&/g, "-and-") // Replace & with 'and'
-    .replace(/[^\w\-]+/g, "") // Remove all non-word characters except for -
-    .replace(/\-\-+/g, "-"); // Replace multiple - with single -
-}
-
-function createHeading(level) {
-  const Heading = ({ children }) => {
-    let slug = slugify(children);
-    return React.createElement(
-      `h${level}`,
-      { id: slug },
-      [
-        React.createElement("a", {
-          href: `#${slug}`,
-          key: `link-${slug}`,
-          className: "anchor",
-        }),
-      ],
-      children,
-    );
-  };
-
-  Heading.displayName = `Heading${level}`;
-
-  return Heading;
-}
-
 let components = {
   h1: createHeading(1),
   h2: createHeading(2),
@@ -95,12 +65,28 @@ let components = {
   h6: createHeading(6),
   Image: RoundedImage,
   a: CustomLink,
-  code: Code,
+  code: (props: ComponentPropsWithoutRef<"code">) => (
+    <code className={styles.code} {...props} />
+  ),
+  pre: ({ ...props }: React.HTMLAttributes<HTMLElement>) => (
+    <CodeBlock className={cn(styles.pre)} {...props} />
+  ),
   Table,
+};
+
+let options: rehypePrettyCodeOptions;
+options = {
+  theme: "github-dark",
 };
 
 export function CustomMDX(props) {
   return (
-    <MDXRemote {...props} components={{ ...components, ...props.components }} />
+    <MDXRemote {...props} components={{ ...components, ...props.components }}
+      options={{
+        mdxOptions: {
+          rehypePlugins: [[rehypePrettyCode, options]],
+        },
+      }}
+    />
   );
 }
