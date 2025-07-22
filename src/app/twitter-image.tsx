@@ -2,10 +2,10 @@ import { ImageResponse } from "next/og";
 import { join } from "node:path";
 import { readFile } from "node:fs/promises";
 
-export const alt = "Chun-Ho (Hugo) Lin - 1chooo";
+export const alt = "Hugo Lin Dev's Open Graph Image";
 export const size = {
-  width: 2560,
-  height: 1440,
+  width: 1200,
+  height: 630,
 };
 export const contentType = "image/png";
 
