@@ -90,25 +90,26 @@ export default async function Blog({ params }) {
         {post.metadata.title}
       </h1>
       <div className="flex justify-between items-center mt-2 mb-8 text-sm flex-nowrap">
-  <p className="font-mono text-xs text-gray-500 dark:text-gray-500 flex-shrink-0">
-    <Link
-      rel="noopener noreferrer"
-      target="_blank"
-      className="hover:text-gray-800 dark:hover:text-gray-400"
-      href="https://github.com/1chooo"
-    >
-     @1chooo
-    </Link> {" | "}
-    {formatDate(post.metadata.publishedAt)}
-  </p>
-  <Suspense fallback={<div className="text-xs">Loading views...</div>}>
-    <ViewCounter 
-      className="font-mono text-xs text-gray-500 dark:text-gray-500 flex-shrink-0" 
-      slug={post.slug} 
-      trackView 
-    />
-  </Suspense>
-</div>
+        <p className="font-mono text-xs text-neutral-600 dark:text-neutral-400 flex-shrink-0">
+          <Link
+            rel="noopener noreferrer"
+            target="_blank"
+            className="hover:text-gray-800 dark:hover:text-gray-400"
+            href="https://github.com/1chooo"
+          >
+            @1chooo
+          </Link>{" "}
+          {" | "}
+          {formatDate(post.metadata.publishedAt)}
+        </p>
+        <Suspense fallback={<div className="text-xs">Loading views...</div>}>
+          <ViewCounter
+            className="font-mono text-xs text-neutral-600 dark:text-neutral-400 flex-shrink-0"
+            slug={post.slug}
+            trackView
+          />
+        </Suspense>
+      </div>
       <article className="prose">
         <CustomMDX source={post.content} />
       </article>

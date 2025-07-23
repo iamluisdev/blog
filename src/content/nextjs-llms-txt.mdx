@@ -38,7 +38,7 @@ Let's use the **Next.js v15 App Router** as an example to demonstrate how to imp
 
 ```ts
 // app/llms.txt/route.ts
-export const dynamic = 'force-static'; // or make it dynamic if you want
+export const dynamic = "force-static"; // or make it dynamic if you want
 
 export function GET() {
   return new Response(`# Title
@@ -69,8 +69,11 @@ Additionally, if you need to provide a more complex and detailed context for you
 The `/llms.txt` file offers a straightforward yet powerful method to furnish LLMs with the essential context and information about your website. By adopting this format, you ensure that LLMs can readily access and comprehend your content, thereby enhancing their capacity to assist users and execute tasks efficiently.
 
 [^1]: [How Easy is it to Scrape Text with LLMs?](https://medium.com/@johnny.w.jang_33335/how-easy-is-it-to-scrape-text-with-llms-013e6c1415bb)
-[^2]: [Browser Use: A Way for LLMs to Interact with the Internet](https://www.edlitera.com/blog/posts/browser-use-llms-online)
-[^3]: [Format](https://llmstxt.org/#format)
-[^4]: [llms.txt vs robots.txt ?](https://medium.com/@speaktoharisudhan/llm-txt-vs-robots-txt-bb22c9739434)
-[^5]: [vercel/next.js#80692 (comment)](https://github.com/vercel/next.js/discussions/80692#discussioncomment-13524001)
 
+[^2]: [Browser Use: A Way for LLMs to Interact with the Internet](https://www.edlitera.com/blog/posts/browser-use-llms-online)
+
+[^3]: [Format](https://llmstxt.org/#format)
+
+[^4]: [llms.txt vs robots.txt ?](https://medium.com/@speaktoharisudhan/llm-txt-vs-robots-txt-bb22c9739434)
+
+[^5]: [vercel/next.js#80692 (comment)](https://github.com/vercel/next.js/discussions/80692#discussioncomment-13524001)

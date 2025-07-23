@@ -10,12 +10,14 @@ interface ViewCounterProps {
   slug: string;
   className?: string;
   trackView?: boolean;
+  displayViews?: boolean;
 }
 
 export function ViewCounter({
   slug,
   className = "",
   trackView = false,
+  displayViews = true,
 }: ViewCounterProps) {
   const [views, setViews] = useState<number>(0);
   const [loading, setLoading] = useState(true);
@@ -66,12 +68,18 @@ export function ViewCounter({
   }, [slug, trackView]);
 
   if (loading) {
-    return <p className={className}>{"... views"}</p>;
+    return displayViews ? (
+      <p className={className}>{"... views"}</p>
+    ) : (
+      <p className={className}>{"..."}</p>
+    );
   }
 
-  return (
+  return displayViews ? (
     <p
       className={className}
     >{`${Number(views).toLocaleString("en-US")} views`}</p>
+  ) : (
+    <p className={className}>{`${Number(views).toLocaleString("en-US")}`}</p>
   );
 }
