@@ -4,11 +4,11 @@ function Header() {
   return (
     <header className="mt-16 mb-8">
       <div className="flex items-center">
-        <Link href="/">
+        <Link href="/" className="flex items-center">
           <img
             src="/favicon.ico"
             alt="Author avatar image"
-            className="h-10 w-10 rounded-full"
+            className="w-10 h-10 rounded-full"
           />
           <svg
             height="32"
