@@ -3,8 +3,8 @@ import Link from "next/link";
 function Header() {
   return (
     <header className="mt-16 mb-8">
-      <Link href="/">
-        <div className="flex items-center">
+      <div className="flex items-center">
+        <Link href="/">
           <img
             src="/favicon.ico"
             alt="Author avatar image"
@@ -19,8 +19,8 @@ function Header() {
             <path d="M22 5L9 28" stroke="#374151"></path>
           </svg>
           <h1 className="text-3xl font-semibold">Dev</h1>
-        </div>
-      </Link>
+        </Link>
+      </div>
     </header>
   );
 }
