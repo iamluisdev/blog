@@ -45,12 +45,12 @@ export function PostsClient({ posts: initialPosts }: PostsProps) {
   return (
     <Suspense fallback={null}>
       <main className="max-w-2xl m-auto mb-10 text-sm">
-        <header className="text-gray-500 dark:text-gray-600 flex items-center text-xs font-mono">
+        <header className="text-neutral-500 dark:text-neutral-600 flex items-center text-xs font-mono">
           <button
             onClick={sortDate}
             className={`w-12 h-9 text-left cursor-pointer ${
               sort[0] === "date" && sort[1] !== "desc"
-                ? "text-gray-700 dark:text-gray-400"
+                ? "text-neutral-700 dark:text-neutral-400"
                 : ""
             }`}
           >
@@ -66,7 +66,7 @@ export function PostsClient({ posts: initialPosts }: PostsProps) {
                   cursor-pointer
                   ${
                     sort[0] === "views"
-                      ? "text-gray-700 dark:text-gray-400"
+                      ? "text-neutral-700 dark:text-neutral-400"
                       : ""
                   }
                 `}
@@ -121,7 +121,7 @@ function List({ posts, sort }: { posts: Post[]; sort: SortSetting }) {
           <li key={post.id || post.slug}>
             <Link href={`/${post.slug}`}>
               <span
-                className={`flex transition-[background-color] hover:bg-gray-100 dark:hover:bg-[#242424] active:bg-gray-200 dark:active:bg-[#222] border-y border-gray-200 dark:border-[#313131]
+                className={`flex transition-[background-color] hover:bg-neutral-100 dark:hover:bg-[#242424] active:bg-neutral-200 dark:active:bg-[#222] border-y border-neutral-200 dark:border-[#313131]
                 ${!firstOfYear ? "border-t-0" : ""}
                 ${lastOfYear ? "border-b-0" : ""}
               `}
