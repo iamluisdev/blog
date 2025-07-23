@@ -1,8 +1,8 @@
 ---
-title: "Updating an Outdated Create React App (CRA) to Support TypeScript 5.x"
+title: "TypeScript 5.x with Create React App (CRA)"
 publishedAt: "2024-08-10"
 summary: "Create React App (CRA) was officially deprecated by Facebook, and it's time to move on to other alternatives. However, we can still use CRA with TypeScript `5.x` by adding `overrides` to the `package.json`. Let's see how to do it!"
-image: /images/posts/goodbye-react-create-app/banner.webp
+image: /images/posts/typescript-5-with-cra/banner.webp
 ---
 
 > Create React App (CRA) was officially deprecated by Facebook, and it's time to move on to other alternatives. However, we can still use CRA with TypeScript `5.x` by adding `overrides` to the `package.json`. Let's see how to do it!
@@ -36,11 +36,11 @@ Therefore, through this post, I aim to document the resolution process and provi
 
 In the past, I used [`create-react-app` (CRA)](https://github.com/facebook/create-react-app) to set up my React projects. However, during this upgrade process, I discovered that CRA only supports up to [`v5.0.1`](https://github.com/facebook/create-react-app/releases/tag/v5.0.1). Looking at Facebook's GitHub repository, it's evident that CRA is no longer maintained, with its last update in 2022. [^1] Unsurprisingly, CRA does not support TypeScript `5.x`, only up to version `4.x`, which explains why I was unable to upgrade TypeScript to `5.x`.
 
-![create-react-app v5.0.1](/images/posts/goodbye-react-create-app/create-react-app-v-5-0-1.webp)
+![create-react-app v5.0.1](/images/posts/typescript-5-with-cra/create-react-app-v-5-0-1.webp)
 
 I then started searching online for the reasons why CRA is no longer maintained and whether there are any alternatives. First, I found that [React's](https://react.dev/) official documentation no longer mentions `create-react-app` as a recommended way to set up a React project. Instead, it suggests using frameworks like [Next.js, Remix, Gatsby, Expo (for native apps), etc.](https://react.dev/learn/start-a-new-react-project). This shift could be one of the reasons CRA is no longer supported.
 
-![Start a New React Project](/images/posts/goodbye-react-create-app/start-a-new-react-project.webp)
+![Start a New React Project](/images/posts/typescript-5-with-cra/start-a-new-react-project.webp)
 
 Additionally, I found an insightful article, [Goodbye create-react-app](https://dev.to/ag2byte/create-react-app-is-officially-dead-h7o), which outlines some of the reasons behind CRA's discontinuation. The article explains that CRA was officially abandoned by Facebook due to performance issues. Specifically, it's too slow for current needs, especially during initialization, and it produces outdated warnings that have frustrated developers for quite some time. These problems are also difficult for beginners to resolve, making CRA an outdated choice.
 

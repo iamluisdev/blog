@@ -6,6 +6,7 @@ import { formatDate, getBlogPosts } from "@/lib/api/blog";
 import { BASE_URL } from "@/lib/constants";
 import { ViewCounter } from "@/components/view-counter";
 import Link from "next/link";
+import Balancer from "react-wrap-balancer";
 
 export async function generateStaticParams() {
   let posts = getBlogPosts();
@@ -87,7 +88,7 @@ export default async function Blog({ params }) {
         }}
       />
       <h1 className="font-semibold text-2xl tracking-tighter">
-        {post.metadata.title}
+        <Balancer>{post.metadata.title}</Balancer>
       </h1>
       <div className="flex justify-between items-center mt-2 mb-8 text-sm flex-nowrap">
         <p className="font-mono text-xs text-neutral-600 dark:text-neutral-400 flex-shrink-0">

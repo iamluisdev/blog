@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Suspense } from "react";
 import { ViewCounter } from "@/components/view-counter";
+import Balancer from "react-wrap-balancer";
 
 type SortSetting = ["date" | "views", "desc" | "asc"];
 
@@ -143,7 +144,7 @@ function List({ posts, sort }: { posts: Post[]; sort: SortSetting }) {
                       marginRight: "1rem",
                     }}
                   >
-                    {post.title || post.metadata.title}
+                    <Balancer>{post.metadata.title}</Balancer>
                   </span>
                   <Suspense fallback={<div className="text-xs">...</div>}>
                     <ViewCounter

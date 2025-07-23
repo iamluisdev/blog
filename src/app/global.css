@@ -7,7 +7,6 @@
 
 html {
   color-scheme: light dark;
-  min-width: 360px;
   background-color: #fafafa;
 }
 
@@ -115,10 +114,6 @@ table {
   max-width: fit-content;
   overflow-x: auto;
   white-space: nowrap;
-}
-
-.title {
-  text-wrap: balance;
 }
 
 @media (prefers-color-scheme: dark) {
