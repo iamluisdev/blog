@@ -1,6 +1,5 @@
 import React, { ComponentPropsWithoutRef } from "react";
 import rehypeShiki from "@shikijs/rehype";
-import Link from "next/link";
 import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { createHeading } from "@/components/mdx/heading";
@@ -9,6 +8,7 @@ import remarkFootnotes from "remark-footnotes";
 import { MarkdownAlert, Highlight } from "@/components/mdx/markdown-alert";
 import { LeetCodeLink } from "@/components/mdx/leetcode-link";
 
+import { Anchor, type AnchorProps } from "@/components/mdx/anchor";
 import { cn } from "@/lib/utils";
 
 import styles from "@/styles/md.module.css";
@@ -35,24 +35,6 @@ function Table({ data }) {
   );
 }
 
-function CustomLink(props) {
-  let href = props.href;
-
-  if (href.startsWith("/")) {
-    return (
-      <Link href={href} {...props}>
-        {props.children}
-      </Link>
-    );
-  }
-
-  if (href.startsWith("#")) {
-    return <a {...props} />;
-  }
-
-  return <a target="_blank" rel="noopener noreferrer" {...props} />;
-}
-
 function RoundedImage(props) {
   return <Image alt={props.alt} className="rounded-lg" {...props} />;
 }
@@ -65,7 +47,7 @@ let components = {
   h5: createHeading(5),
   h6: createHeading(6),
   Image: RoundedImage,
-  a: CustomLink,
+  a: (props: AnchorProps) => <Anchor {...props} />,
   code: (props: ComponentPropsWithoutRef<"code">) => (
     <code className={styles.code} {...props} />
   ),
