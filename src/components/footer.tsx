@@ -43,15 +43,15 @@ export default function Footer() {
             <p className="ml-2 h-7">rss</p>
           </Link>
         </li>
-        <li key="github">
+        <li key="source">
           <Link
             className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
             rel="noopener noreferrer"
             target="_blank"
-            href="https://github.com/1chooo"
+            href="https://github.com/1chooo/dev"
           >
             <ArrowIcon />
-            <p className="ml-2 h-7">github</p>
+            <p className="ml-2 h-7">source</p>
           </Link>
         </li>
       </ul>
