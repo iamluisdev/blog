@@ -7,6 +7,7 @@ import { BASE_URL } from "@/lib/constants";
 import { ViewCounter } from "@/components/view-counter";
 import Link from "next/link";
 import Balancer from "react-wrap-balancer";
+import { FadeLeft, FadeUp, FadeIn } from "@/components/animations";
 
 export async function generateStaticParams() {
   let posts = getBlogPosts();
@@ -87,33 +88,39 @@ export default async function Blog({ params }) {
           }),
         }}
       />
-      <h1 className="font-semibold text-2xl tracking-tighter">
-        <Balancer>{post.metadata.title}</Balancer>
-      </h1>
-      <div className="flex justify-between items-center mt-2 mb-8 text-sm flex-nowrap">
-        <p className="font-mono text-xs text-neutral-600 dark:text-neutral-400 flex-shrink-0">
-          <Link
-            rel="noopener noreferrer"
-            target="_blank"
-            className="hover:text-gray-800 dark:hover:text-gray-400"
-            href="https://github.com/1chooo"
-          >
-            @1chooo
-          </Link>{" "}
-          {" | "}
-          {formatDate(post.metadata.publishedAt)}
-        </p>
-        <Suspense fallback={<div className="text-xs">Loading views...</div>}>
-          <ViewCounter
-            className="font-mono text-xs text-neutral-600 dark:text-neutral-400 flex-shrink-0"
-            slug={post.slug}
-            trackView
-          />
-        </Suspense>
-      </div>
-      <article className="prose">
-        <CustomMDX source={post.content} />
-      </article>
+      <FadeLeft delay={0.3}>
+        <h1 className="font-semibold text-2xl tracking-tighter">
+          <Balancer>{post.metadata.title}</Balancer>
+        </h1>
+      </FadeLeft>
+      <FadeUp delay={0.3 * 2}>
+        <div className="flex justify-between items-center mt-2 mb-8 text-sm flex-nowrap">
+          <p className="font-mono text-xs text-neutral-600 dark:text-neutral-400 flex-shrink-0">
+            <Link
+              rel="noopener noreferrer"
+              target="_blank"
+              className="hover:text-gray-800 dark:hover:text-gray-400"
+              href="https://github.com/1chooo"
+            >
+              @1chooo
+            </Link>{" "}
+            {" | "}
+            {formatDate(post.metadata.publishedAt)}
+          </p>
+          <Suspense fallback={<div className="text-xs">Loading views...</div>}>
+            <ViewCounter
+              className="font-mono text-xs text-neutral-600 dark:text-neutral-400 flex-shrink-0"
+              slug={post.slug}
+              trackView
+            />
+          </Suspense>
+        </div>
+      </FadeUp>
+      <FadeIn delay={0.3 * 3}>
+        <article className="prose">
+          <CustomMDX source={post.content} />
+        </article>
+      </FadeIn>
     </section>
   );
 }
