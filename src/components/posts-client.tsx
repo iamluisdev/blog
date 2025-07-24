@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { ViewCounter } from "@/components/view-counter";
 import Balancer from "react-wrap-balancer";
-import { HoverPop, FadeDown, FadeInLi } from "@/components/animations";
+import { FadeDown, FadeInLi } from "@/components/animations";
 
 type SortSetting = ["date" | "views", "desc" | "asc"];
 

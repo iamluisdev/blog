@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FadeIn, FadeInLi } from "@/components/animations";
 
 function ArrowIcon() {
   return (
@@ -21,7 +22,7 @@ export default function Footer() {
   return (
     <footer className="mb-16">
       <ul className="font-sm mt-8 flex flex-col space-x-0 space-y-2 text-neutral-600 md:flex-row md:space-x-4 md:space-y-0 dark:text-neutral-300">
-        <li key="1chooo">
+        <FadeInLi key="1chooo">
           <Link
             className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
             rel="noopener noreferrer"
@@ -31,8 +32,8 @@ export default function Footer() {
             <ArrowIcon />
             <p className="ml-2 h-7">1chooo</p>
           </Link>
-        </li>
-        <li key="rss">
+        </FadeInLi>
+        <FadeInLi key="rss">
           <Link
             className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
             rel="noopener noreferrer"
@@ -42,8 +43,8 @@ export default function Footer() {
             <ArrowIcon />
             <p className="ml-2 h-7">rss</p>
           </Link>
-        </li>
-        <li key="source">
+        </FadeInLi>
+        <FadeInLi key="source">
           <Link
             className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
             rel="noopener noreferrer"
@@ -53,11 +54,13 @@ export default function Footer() {
             <ArrowIcon />
             <p className="ml-2 h-7">source</p>
           </Link>
-        </li>
+        </FadeInLi>
       </ul>
-      <p className="mt-8 text-neutral-600 dark:text-neutral-300">
-        © {new Date().getFullYear()} Hugo Lin. All rights reserved.
-      </p>
+      <FadeIn>
+        <p className="mt-8 text-neutral-600 dark:text-neutral-300">
+          © {new Date().getFullYear()} Hugo Lin. All rights reserved.
+        </p>
+      </FadeIn>
     </footer>
   );
 }
