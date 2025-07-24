@@ -3,7 +3,6 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Suspense } from "react";
-import { ViewCounter } from "@/components/view-counter";
 import Balancer from "react-wrap-balancer";
 import { FadeDown, FadeInLi } from "@/components/animations";
 
@@ -39,7 +38,7 @@ export function PostsClient({ posts: initialPosts }: PostsProps) {
   function sortViews() {
     setSort((sort) => [
       sort[0] === "views" && sort[1] === "asc" ? "date" : "views",
-      sort[0] !== "views" ? "desc" : sort[1] === "asc" ? "desc" : "asc",
+      sort[0] !== "views" ? "desc" : sort[1] === "desc" ? "asc" : "desc",
     ]);
   }
 
@@ -154,12 +153,9 @@ function List({ posts, sort }: { posts: Post[]; sort: SortSetting }) {
                     <Balancer>{post.metadata.title}</Balancer>
                   </span>
                   <Suspense fallback={<div className="text-xs">...</div>}>
-                    <ViewCounter
-                      slug={post.slug}
-                      trackView={false}
-                      displayViews={false}
-                      className="text-neutral-600 dark:text-neutral-400 text-xs mr-1 tabular-nums"
-                    />
+                    <span className="text-neutral-600 dark:text-neutral-400 text-xs mr-1 tabular-nums">
+                      {(post.views || 0).toLocaleString("en-US")}
+                    </span>
                   </Suspense>
                 </span>
               </span>
