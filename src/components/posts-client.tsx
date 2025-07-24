@@ -43,25 +43,24 @@ export function PostsClient({ posts: initialPosts }: PostsProps) {
   }
 
   return (
-    <Suspense fallback={null}>
-      <main className="max-w-2xl m-auto mb-10 text-sm font-mono">
-        <header className="text-neutral-500 dark:text-neutral-600 flex items-center text-xs">
-          <button
-            onClick={sortDate}
-            className={`w-12 h-9 text-left cursor-pointer ${
-              sort[0] === "date" && sort[1] !== "desc"
-                ? "text-neutral-700 dark:text-neutral-400"
-                : ""
-            }`}
-          >
-            date
-            {sort[0] === "date" && sort[1] === "asc" && "↑"}
-          </button>
-          <span className="grow pl-2">title</span>
-          <button
-            onClick={sortViews}
-            className={`
-                  h-9
+    <main className="max-w-2xl m-auto mb-10 text-sm font-mono">
+      <header className="text-neutral-500 dark:text-neutral-600 flex items-center text-xs">
+        <button
+          onClick={sortDate}
+          className={`w-12 h-9 text-left cursor-pointer ${
+            sort[0] === "date" && sort[1] !== "desc"
+              ? "text-neutral-700 dark:text-neutral-400"
+              : ""
+          }`}
+        >
+          date
+          {sort[0] === "date" && sort[1] === "asc" && "↑"}
+        </button>
+        <span className="grow pl-2">title</span>
+        <button
+          onClick={sortViews}
+          className={`
+              h-9
                   pl-4
                   cursor-pointer
                   ${
@@ -70,15 +69,16 @@ export function PostsClient({ posts: initialPosts }: PostsProps) {
                       : ""
                   }
                 `}
-          >
-            views
-            {sort[0] === "views" ? (sort[1] === "asc" ? "↑" : "↓") : ""}
-          </button>
-        </header>
+        >
+          views
+          {sort[0] === "views" ? (sort[1] === "asc" ? "↑" : "↓") : ""}
+        </button>
+      </header>
 
+      <Suspense fallback={null}>
         <List posts={initialPosts} sort={sort} />
-      </main>
-    </Suspense>
+      </Suspense>
+    </main>
   );
 }
 
