@@ -44,8 +44,8 @@ export function PostsClient({ posts: initialPosts }: PostsProps) {
 
   return (
     <Suspense fallback={null}>
-      <main className="max-w-2xl m-auto mb-10 text-sm">
-        <header className="text-neutral-500 dark:text-neutral-600 flex items-center text-xs font-mono">
+      <main className="max-w-2xl m-auto mb-10 text-sm font-mono">
+        <header className="text-neutral-500 dark:text-neutral-600 flex items-center text-xs">
           <button
             onClick={sortDate}
             className={`w-12 h-9 text-left cursor-pointer ${
