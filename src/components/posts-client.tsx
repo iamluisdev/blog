@@ -1,8 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import Link from "next/link";
-import { Suspense } from "react";
 import Balancer from "react-wrap-balancer";
 import { FadeDown, FadeInLi } from "@/components/animations";
 
@@ -27,6 +26,65 @@ interface PostsProps {
 
 export function PostsClient({ posts: initialPosts }: PostsProps) {
   const [sort, setSort] = useState<SortSetting>(["date", "desc"]);
+  const [posts, setPosts] = useState(initialPosts);
+  const [isViewsLoading, setIsViewsLoading] = useState(true);
+
+  // Fetch views data for all posts on component mount and periodically refresh
+  useEffect(() => {
+    const fetchAllViews = async (isInitialLoad = false) => {
+      try {
+        const response = await fetch("/api/views/all", { method: "GET" });
+        
+        if (response.ok) {
+          const data = await response.json();
+          const viewsMap = data.views || {};
+          
+          const updatedPosts = initialPosts.map((post) => {
+            const views = viewsMap[post.slug] || 0;
+            return {
+              ...post,
+              views,
+              viewsFormatted: views.toLocaleString("en-US"),
+            };
+          });
+          
+          setPosts(updatedPosts);
+        } else {
+          setPosts(initialPosts);
+        }
+      } catch (error) {
+        console.error("Error fetching views:", error);
+        setPosts(initialPosts);
+      } finally {
+        if (isInitialLoad) {
+          setIsViewsLoading(false);
+        }
+      }
+    };
+
+    // Initial fetch
+    fetchAllViews(true);
+
+    // Set up periodic refresh every 30 seconds
+    const interval = setInterval(() => {
+      fetchAllViews(false);
+    }, 30000);
+
+    // Refresh when page becomes visible again
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        fetchAllViews(false);
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    // Cleanup interval and event listener on unmount
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [initialPosts]);
 
   function sortDate() {
     setSort((sort) => [
@@ -77,14 +135,12 @@ export function PostsClient({ posts: initialPosts }: PostsProps) {
         </header>
       </FadeDown>
 
-      <Suspense fallback={null}>
-        <List posts={initialPosts} sort={sort} />
-      </Suspense>
+      <List posts={posts} sort={sort} isViewsLoading={isViewsLoading} />
     </main>
   );
 }
 
-function List({ posts, sort }: { posts: Post[]; sort: SortSetting }) {
+function List({ posts, sort, isViewsLoading }: { posts: Post[]; sort: SortSetting; isViewsLoading: boolean }) {
   // sort can be ["date", "desc"] or ["views", "desc"] for example
   const sortedPosts = useMemo(() => {
     const [sortKey, sortDirection] = sort;
@@ -152,11 +208,15 @@ function List({ posts, sort }: { posts: Post[]; sort: SortSetting }) {
                   >
                     <Balancer>{post.metadata.title}</Balancer>
                   </span>
-                  <Suspense fallback={<div className="text-xs">...</div>}>
+                  {isViewsLoading ? (
+                    <span className="text-neutral-600 dark:text-neutral-400 text-xs mr-1 tabular-nums">
+                      ...
+                    </span>
+                  ) : (
                     <span className="text-neutral-600 dark:text-neutral-400 text-xs mr-1 tabular-nums">
                       {(post.views || 0).toLocaleString("en-US")}
                     </span>
-                  </Suspense>
+                  )}
                 </span>
               </span>
             </Link>
