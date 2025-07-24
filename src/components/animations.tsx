@@ -28,6 +28,32 @@ function PopIn(props: {
   );
 }
 
+function PopInLi(props: {
+  children: React.ReactNode;
+  delay?: number;
+  divKey?: any;
+}) {
+  return (
+    <motion.li
+      initial={{
+        opacity: 0,
+        scale: 0.5,
+      }}
+      animate={{
+        opacity: 1,
+        scale: 1,
+      }}
+      transition={{
+        delay: props.delay || 0.5,
+        type: "spring",
+      }}
+      key={props.divKey || undefined}
+    >
+      {props.children}
+    </motion.li>
+  );
+}
+
 function HoverPop(props: { children: React.ReactNode; scale?: number }) {
   return (
     <motion.div
@@ -61,6 +87,29 @@ function FadeIn(props: {
     >
       {props.children}
     </motion.div>
+  );
+}
+
+function FadeInLi(props: {
+  children: React.ReactNode;
+  delay?: number;
+  divKey?: any;
+}) {
+  return (
+    <motion.li
+      initial={{
+        opacity: 0,
+      }}
+      animate={{
+        opacity: 1,
+      }}
+      transition={{
+        delay: props.delay || 0.5,
+      }}
+      key={props.divKey || undefined}
+    >
+      {props.children}
+    </motion.li>
   );
 }
 
@@ -192,4 +241,6 @@ export {
   FadeRight,
   HoverPop,
   ClickFadeRight,
+  PopInLi,
+  FadeInLi,
 };

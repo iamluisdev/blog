@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { ViewCounter } from "@/components/view-counter";
 import Balancer from "react-wrap-balancer";
-import { HoverPop, FadeIn, FadeDown } from "@/components/animations";
+import { HoverPop, FadeDown, FadeInLi } from "@/components/animations";
 
 type SortSetting = ["date" | "views", "desc" | "asc"];
 
@@ -121,50 +121,50 @@ function List({ posts, sort }: { posts: Post[]; sort: SortSetting }) {
           ) !== year;
 
         return (
-          <FadeIn key={post.id || post.slug} delay={i * 0.1} divKey={post.slug}>
-            <li>
-              <HoverPop scale={1.02}>
-                <Link href={`/${post.slug}`}>
-                  <span
-                    className={`flex transition-[background-color] hover:bg-neutral-100 dark:hover:bg-[#242424] active:bg-neutral-200 dark:active:bg-[#222] border-y border-neutral-200 dark:border-[#313131]
+          <FadeInLi
+            key={post.id || post.slug}
+            delay={i * 0.1}
+            divKey={post.slug}
+          >
+            <Link href={`/${post.slug}`}>
+              <span
+                className={`flex transition-[background-color] hover:bg-neutral-100 dark:hover:bg-[#242424] active:bg-neutral-200 dark:active:bg-[#222] border-y border-neutral-200 dark:border-[#313131]
                     ${!firstOfYear ? "border-t-0" : ""}
                     ${lastOfYear ? "border-b-0" : ""}
                   `}
-                  >
-                    <span
-                      className={`py-3 flex grow items-center ${
-                        !firstOfYear ? "ml-14" : ""
-                      }`}
-                    >
-                      {firstOfYear && (
-                        <span className="w-14 inline-block self-start shrink-0 text-neutral-600 dark:text-neutral-400">
-                          {year}
-                        </span>
-                      )}
-
-                      <span
-                        className="grow text-neutral-800 dark:text-neutral-100"
-                        style={{
-                          wordBreak: "break-word",
-                          marginRight: "1rem",
-                        }}
-                      >
-                        <Balancer>{post.metadata.title}</Balancer>
-                      </span>
-                      <Suspense fallback={<div className="text-xs">...</div>}>
-                        <ViewCounter
-                          slug={post.slug}
-                          trackView={false}
-                          displayViews={false}
-                          className="text-neutral-600 dark:text-neutral-400 text-xs mr-1 tabular-nums"
-                        />
-                      </Suspense>
+              >
+                <span
+                  className={`py-3 flex grow items-center ${
+                    !firstOfYear ? "ml-14" : ""
+                  }`}
+                >
+                  {firstOfYear && (
+                    <span className="w-14 inline-block self-start shrink-0 text-neutral-600 dark:text-neutral-400">
+                      {year}
                     </span>
+                  )}
+
+                  <span
+                    className="grow text-neutral-800 dark:text-neutral-100"
+                    style={{
+                      wordBreak: "break-word",
+                      marginRight: "1rem",
+                    }}
+                  >
+                    <Balancer>{post.metadata.title}</Balancer>
                   </span>
-                </Link>
-              </HoverPop>
-            </li>
-          </FadeIn>
+                  <Suspense fallback={<div className="text-xs">...</div>}>
+                    <ViewCounter
+                      slug={post.slug}
+                      trackView={false}
+                      displayViews={false}
+                      className="text-neutral-600 dark:text-neutral-400 text-xs mr-1 tabular-nums"
+                    />
+                  </Suspense>
+                </span>
+              </span>
+            </Link>
+          </FadeInLi>
         );
       })}
     </ul>
