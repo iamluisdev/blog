@@ -55,6 +55,7 @@ Dev Blog by Hugo Lin
     pnpm dev
     ```
 5. Open your browser at `http://localhost:3000`
+6. Edit your post in the [`src/content/`](src/content/) folder (see [template](src/content/template/) for writing posts)
 
 If you'd like to deploy your blog...
 
@@ -65,6 +66,3 @@ Deploy the site and login to start blogging!
 ## License
 
 Under the [MIT License](./LICENSE).
-
-https://github.com/1chooo/portfolio/tree/9d93513ebb696f6720a018220c348de51d72624a/apps/web/src/contents/posts
-
