@@ -100,9 +100,9 @@ export default async function Blog({ params }) {
               rel="noopener noreferrer"
               target="_blank"
               className="hover:text-gray-800 dark:hover:text-gray-400"
-              href="https://github.com/1chooo"
+              href="https://x.com/iamluis_dev"
             >
-              @1chooo
+              @iamluis_dev
             </Link>{" "}
             {" | "}
             {formatDate(post.publishedAt)}
