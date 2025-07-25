@@ -1,8 +1,9 @@
 "use client";
 
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import Balancer from "react-wrap-balancer";
+import useSWR from "swr";
 import { FadeDown, FadeInLi } from "@/components/animations";
 import { Post } from "@/types/post";
 
@@ -14,65 +15,40 @@ interface PostsProps {
 
 export function PostsClient({ posts: initialPosts }: PostsProps) {
   const [sort, setSort] = useState<SortSetting>(["date", "desc"]);
-  const [posts, setPosts] = useState(initialPosts);
-  const [isViewsLoading, setIsViewsLoading] = useState(true);
+  
+  // Fetcher function for SWR
+  const fetcher = async (url: string) => {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error('Failed to fetch views');
+    }
+    const data = await response.json();
+    return data.views || {};
+  };
 
-  // Fetch views data for all posts on component mount and periodically refresh
-  useEffect(() => {
-    const fetchAllViews = async (isInitialLoad = false) => {
-      try {
-        const response = await fetch("/api/views/all", { method: "GET" });
-        
-        if (response.ok) {
-          const data = await response.json();
-          const viewsMap = data.views || {};
-          
-          const updatedPosts = initialPosts.map((post) => {
-            const views = viewsMap[post.slug] || 0;
-            return {
-              ...post,
-              views,
-              viewsFormatted: views.toLocaleString("en-US"),
-            };
-          });
-          
-          setPosts(updatedPosts);
-        } else {
-          setPosts(initialPosts);
-        }
-      } catch (error) {
-        console.error("Error fetching views:", error);
-        setPosts(initialPosts);
-      } finally {
-        if (isInitialLoad) {
-          setIsViewsLoading(false);
-        }
-      }
-    };
+  // Use SWR to fetch views data with automatic revalidation
+  const { data: viewsMap = {}, isLoading } = useSWR(
+    "/api/views/all",
+    fetcher,
+    {
+      refreshInterval: 30000, // Refresh every 30 seconds
+      revalidateOnFocus: true, // Revalidate when window gets focus
+      revalidateOnReconnect: true, // Revalidate when reconnected
+      dedupingInterval: 5000, // Dedupe requests within 5 seconds
+    }
+  );
 
-    // Initial fetch
-    fetchAllViews(true);
-
-    // Set up periodic refresh every 30 seconds
-    const interval = setInterval(() => {
-      fetchAllViews(false);
-    }, 30000);
-
-    // Refresh when page becomes visible again
-    const handleVisibilityChange = () => {
-      if (!document.hidden) {
-        fetchAllViews(false);
-      }
-    };
-
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-
-    // Cleanup interval and event listener on unmount
-    return () => {
-      clearInterval(interval);
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-    };
-  }, [initialPosts]);
+  // Merge posts with views data
+  const posts = useMemo(() => {
+    return initialPosts.map((post) => {
+      const views = viewsMap[post.slug] || 0;
+      return {
+        ...post,
+        views,
+        viewsFormatted: views.toLocaleString("en-US"),
+      };
+    });
+  }, [initialPosts, viewsMap]);
 
   function sortDate() {
     setSort((sort) => [
@@ -123,7 +99,7 @@ export function PostsClient({ posts: initialPosts }: PostsProps) {
         </header>
       </FadeDown>
 
-      <List posts={posts} sort={sort} isViewsLoading={isViewsLoading} />
+      <List posts={posts} sort={sort} isViewsLoading={isLoading} />
     </main>
   );
 }
