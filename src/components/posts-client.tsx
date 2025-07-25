@@ -65,7 +65,7 @@ export function PostsClient({ posts: initialPosts }: PostsProps) {
   }
 
   return (
-    <main className="max-w-2xl m-auto mb-10 text-sm font-mono">
+    <div className="max-w-2xl m-auto mb-10 text-sm font-mono">
       <FadeDown delay={0.3 * 3}>
         <header className="text-neutral-500 dark:text-neutral-600 flex items-center text-xs">
           <button
@@ -100,7 +100,7 @@ export function PostsClient({ posts: initialPosts }: PostsProps) {
       </FadeDown>
 
       <List posts={posts} sort={sort} isViewsLoading={isLoading} />
-    </main>
+    </div>
   );
 }
 
@@ -159,10 +159,6 @@ function List({ posts, sort, isViewsLoading }: { posts: Post[]; sort: SortSettin
 
                   <span
                     className="grow text-neutral-800 dark:text-neutral-100"
-                    style={{
-                      wordBreak: "break-word",
-                      marginRight: "1rem",
-                    }}
                   >
                     <Balancer>{post.title}</Balancer>
                   </span>

@@ -3,7 +3,7 @@ import { FadeIn } from "@/components/animations";
 
 export function Footer() {
   return (
-    <footer className="mb-16 mt-8 text-xs dark:text-neutral-300 text-neutral-600 font-mono">
+    <footer className="mb-24 mt-8 text-xs dark:text-neutral-300 text-neutral-600 font-mono">
       <FadeIn>
         <div className="flex">
           <div className="grow text-left">
