@@ -19,7 +19,7 @@ export function Footer() {
           <Link
             className="underline transition-all decoration-neutral-400 dark:decoration-neutral-600 underline-offset-2 decoration-[0.1em] hover:decoration-neutral-700 dark:hover:decoration-neutral-300"
             rel="noopener noreferrer"
-            target="_blank" href="https://github.com/1chooo/dev">
+            target="_blank" href="https://github.com/1chooo/blog">
             Source
           </Link>
         </div>

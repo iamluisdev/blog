@@ -1,6 +1,6 @@
 <div align="center">
   
-<h1>Dev</h1>
+<h1>Blog</h1>
 
 Dev Blog by Hugo Lin
 
@@ -65,3 +65,6 @@ Deploy the site and login to start blogging!
 ## License
 
 Under the [MIT License](./LICENSE).
+
+https://github.com/1chooo/portfolio/tree/9d93513ebb696f6720a018220c348de51d72624a/apps/web/src/contents/posts
+
