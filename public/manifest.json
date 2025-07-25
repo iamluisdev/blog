@@ -1,8 +1,8 @@
 {
-  "name": "Chun-Ho (Hugo) Lin - 1chooo",
-  "short_name": "Hugo Lin",
+  "name": "Luis Barragan - iamluis_dev",
+  "short_name": "Luis Barragan",
   "categories": ["blog", "software", "frontend", "backend"],
-  "description": "I'm Chun-Ho (Hugo) Lin, a graduate with a Bachelor's degree from National Central University (NCU) 🐿️, driven by a sincere passion for Software Engineering 💻.",
+  "description": "Building Deploy Path - better project tracking for Apple developers.",
   "start_url": "/",
   "display": "standalone",
   "lang": "en-US",
