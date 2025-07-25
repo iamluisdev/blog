@@ -11,11 +11,11 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "Hugo Lin Dev",
-  description: "Hugo Lin's Dev Blog",
+  title: "Luis Barragan",
+  description: "Luis Barragan's Dev Blog",
   openGraph: {
-    title: "Hugo Lin Dev",
-    description: "Hugo Lin's Dev Blog",
+    title: "Luis Barragan",
+    description: "Luis Barragan's Dev Blog",
     url: BASE_URL,
     siteName: "Hugo Lin Dev",
     locale: "en_US",
