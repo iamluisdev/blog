@@ -30,7 +30,7 @@ export async function GET() {
   let allBlogs = await getBlogPosts();
 
   for (const post of allBlogs) {
-    const { title, publishedAt, summary } = post.metadata;
+    const { title, publishedAt, summary } = post;
 
     let itemOptions: ItemOptions;
     itemOptions = {

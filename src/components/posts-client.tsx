@@ -4,21 +4,9 @@ import { useMemo, useState, useEffect } from "react";
 import Link from "next/link";
 import Balancer from "react-wrap-balancer";
 import { FadeDown, FadeInLi } from "@/components/animations";
+import { Post } from "@/types/post";
 
 type SortSetting = ["date" | "views", "desc" | "asc"];
-
-interface Post {
-  slug: string;
-  metadata: {
-    title: string;
-    publishedAt: string;
-  };
-  id?: string;
-  date?: string;
-  title?: string;
-  views?: number;
-  viewsFormatted?: string;
-}
 
 interface PostsProps {
   posts: Post[];
@@ -147,10 +135,8 @@ function List({ posts, sort, isViewsLoading }: { posts: Post[]; sort: SortSettin
     return [...posts].sort((a, b) => {
       if (sortKey === "date") {
         return sortDirection === "desc"
-          ? new Date(b.date || b.metadata.publishedAt).getTime() -
-              new Date(a.date || a.metadata.publishedAt).getTime()
-          : new Date(a.date || a.metadata.publishedAt).getTime() -
-              new Date(b.date || b.metadata.publishedAt).getTime();
+          ? new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+          : new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime();
       } else {
         return sortDirection === "desc"
           ? (b.views || 0) - (a.views || 0)
@@ -162,22 +148,18 @@ function List({ posts, sort, isViewsLoading }: { posts: Post[]; sort: SortSettin
   return (
     <ul>
       {sortedPosts.map((post, i: number) => {
-        const postDate = post.date || post.metadata.publishedAt;
+        const postDate = post.publishedAt;
         const year = getYear(postDate);
         const firstOfYear =
           !sortedPosts[i - 1] ||
-          getYear(
-            sortedPosts[i - 1].date || sortedPosts[i - 1].metadata.publishedAt,
-          ) !== year;
+          getYear(sortedPosts[i - 1].publishedAt) !== year;
         const lastOfYear =
           !sortedPosts[i + 1] ||
-          getYear(
-            sortedPosts[i + 1].date || sortedPosts[i + 1].metadata.publishedAt,
-          ) !== year;
+          getYear(sortedPosts[i + 1].publishedAt) !== year;
 
         return (
           <FadeInLi
-            key={post.id || post.slug}
+            key={post.slug}
             delay={i * 0.1}
             divKey={post.slug}
           >
@@ -206,7 +188,7 @@ function List({ posts, sort, isViewsLoading }: { posts: Post[]; sort: SortSettin
                       marginRight: "1rem",
                     }}
                   >
-                    <Balancer>{post.metadata.title}</Balancer>
+                    <Balancer>{post.title}</Balancer>
                   </span>
                   {isViewsLoading ? (
                     <span className="text-neutral-600 dark:text-neutral-400 text-xs mr-1 tabular-nums">

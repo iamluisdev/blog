@@ -4,7 +4,7 @@ import { BASE_URL } from "@/lib/constants";
 async function sitemap() {
   let blogs = getBlogPosts().map((post) => ({
     url: `${BASE_URL}/${post.slug}`,
-    lastModified: post.metadata.publishedAt,
+    lastModified: post.publishedAt,
   }));
 
   let routes = [""].map((route) => ({

@@ -29,7 +29,7 @@ export async function generateMetadata({ params }) {
     publishedAt: publishedTime,
     summary: description,
     image,
-  } = post.metadata;
+  } = post;
   let ogImage = image ? image : `${BASE_URL}/opengraph-image`;
 
   return {
@@ -73,12 +73,12 @@ export default async function Blog({ params }) {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "BlogPosting",
-            headline: post.metadata.title,
-            datePublished: post.metadata.publishedAt,
-            dateModified: post.metadata.publishedAt,
-            description: post.metadata.summary,
-            image: post.metadata.image
-              ? `${BASE_URL}/${post.metadata.image}`
+            headline: post.title,
+            datePublished: post.publishedAt,
+            dateModified: post.publishedAt,
+            description: post.summary,
+            image: post.image
+              ? `${BASE_URL}/${post.image}`
               : `/opengraph-image`,
             url: `${BASE_URL}/${post.slug}`,
             author: {
@@ -90,7 +90,7 @@ export default async function Blog({ params }) {
       />
       <FadeLeft delay={0.3}>
         <h1 className="font-semibold text-2xl tracking-tighter">
-          <Balancer>{post.metadata.title}</Balancer>
+          <Balancer>{post.title}</Balancer>
         </h1>
       </FadeLeft>
       <FadeUp delay={0.3 * 2}>
@@ -105,7 +105,7 @@ export default async function Blog({ params }) {
               @1chooo
             </Link>{" "}
             {" | "}
-            {formatDate(post.metadata.publishedAt)}
+            {formatDate(post.publishedAt)}
           </p>
           <Suspense fallback={<div className="text-xs">Loading views...</div>}>
             <ViewCounter
