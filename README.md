@@ -25,7 +25,7 @@ Dev Blog by Hugo Lin
 - Syntax highlighting
 - SEO Friendly
 - View counter
-- Google Analytics
+- Google / Vercel Analytics
 
 ## Get Started
 
