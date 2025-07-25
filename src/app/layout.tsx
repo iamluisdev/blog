@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     title: "Luis Barragan",
     description: "Luis Barragan's Dev Blog",
     url: BASE_URL,
-    siteName: "Hugo Lin Dev",
+    siteName: "Luis Barragan",
     locale: "en_US",
     type: "website",
   },
