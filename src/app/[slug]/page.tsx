@@ -104,17 +104,14 @@ export default async function Blog({ params }) {
             >
               @iamluis_dev
             </Link>{" "}
-            {" | "}
+                        {" | "}
             {formatDate(post.publishedAt)}
           </p>
-          <Suspense fallback={<div className="text-xs">Loading views...</div>}>
-            <ViewCounter
-              className="font-mono text-xs text-neutral-600 dark:text-neutral-400 flex-shrink-0"
-              slug={post.slug}
-              trackView
-              displayViews={false}
-            />
-          </Suspense>
+          <ViewCounter
+            slug={post.slug}
+            trackView
+            displayViews={false}
+          />
         </div>
       </FadeUp>
       <FadeIn delay={0.3 * 3}>
