@@ -124,6 +124,7 @@ track("Page View", {
 - Vercel Analytics doesn't provide frontend API for retrieving view counts
 - Focus shifted to tracking user engagement rather than displaying view counts
 - Analytics data accessible through Vercel dashboard instead of in-app display
+- Homepage view count display removed to prevent API errors (SWR dependency also removed)
 
 ## Future Enhancements
 
