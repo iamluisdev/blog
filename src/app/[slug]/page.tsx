@@ -112,6 +112,7 @@ export default async function Blog({ params }) {
               className="font-mono text-xs text-neutral-600 dark:text-neutral-400 flex-shrink-0"
               slug={post.slug}
               trackView
+              displayViews={false}
             />
           </Suspense>
         </div>
