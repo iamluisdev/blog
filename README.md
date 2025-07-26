@@ -25,7 +25,7 @@ Dev Blog by Hugo Lin
 - Syntax highlighting
 - SEO Friendly
 - View counter
-- Google / Vercel Analytics
+- Vercel Analytics
 
 ## Get Started
 
@@ -47,7 +47,8 @@ Dev Blog by Hugo Lin
     SUPABASE_SERVICE_ROLE_KEY="YOUR_SUPABASE_SERVICE_ROLE_KEY"
     POSTGRES_URL_NON_POOLING="YOUR_POSTGRES_URL_NON_POOLING"
 
-    GOOGLE_ANALYTICS_ID="YOUR_GOOGLE_ANALYTICS_ID"
+    # Vercel Analytics is automatically enabled when deployed to Vercel
+    # No additional environment variables needed for basic analytics
     ```
 4. Run the development server
     ```bash
@@ -61,8 +62,44 @@ If you'd like to deploy your blog...
 
 - with Vercel: add environment variables in settings and [follow the docs](https://vercel.com/docs/deployments)
 - by yourself: copy above content to .env.local
+
 Deploy the site and login to start blogging!
+
+## Analytics Setup
+
+This project uses Vercel Analytics for tracking page views and user interactions. The analytics setup includes:
+
+### Vercel Analytics Features
+- **Automatic page view tracking**: All pages are automatically tracked when deployed to Vercel
+- **Custom event tracking**: Blog post views are tracked as custom events with metadata
+- **Privacy-focused**: No cookies, fully compliant with privacy regulations
+- **Real-time insights**: View analytics data in your Vercel dashboard
+
+### How it works
+1. **General Analytics**: The `<Analytics />` component in `layout.tsx` provides automatic page view tracking
+2. **Custom Events**: The `ViewCounter` component tracks specific blog post views with additional metadata like slug and path
+3. **Dashboard Access**: View your analytics data in the Vercel dashboard under your project's Analytics tab
+
+### Enabling Analytics
+1. Deploy your project to Vercel
+2. In your Vercel dashboard, go to your project
+3. Click on the "Analytics" tab
+4. Click "Enable" to activate Vercel Analytics
+5. Custom events will automatically start being tracked
+
+### Custom Event Data
+Blog post views are tracked with the following data:
+- Event name: "Page View"
+- Slug: The blog post identifier
+- Path: The full path to the blog post
+- Title: The document title
+
+No additional configuration is required - analytics work out of the box when deployed to Vercel!
+
+## Content
+
+Create `.mdx` files in the `src/content` directory.
 
 ## License
 
-Under the [MIT License](./LICENSE).
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

@@ -9,7 +9,6 @@
   },
   "type": "module",
   "dependencies": {
-    "@next/third-parties": "15.4.3",
     "@supabase/supabase-js": "2.52.0",
     "@tailwindcss/postcss": "4.1.11",
     "@types/node": "24.0.14",

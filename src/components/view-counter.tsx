@@ -1,10 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  ViewResponseSchema,
-  type ViewResponse,
-} from "@/lib/schemas/page-views";
+import { track } from "@vercel/analytics";
 
 interface ViewCounterProps {
   slug: string;
@@ -19,67 +16,39 @@ export function ViewCounter({
   trackView = false,
   displayViews = true,
 }: ViewCounterProps) {
-  const [views, setViews] = useState<number>(0);
+  const [isTracked, setIsTracked] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchViews = async () => {
-      try {
-        if (trackView) {
-          const response = await fetch("/api/views", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ slug }),
-          });
+    // Track the page view using Vercel Analytics
+    if (trackView && !isTracked) {
+      track("Page View", {
+        slug: slug,
+        path: `/${slug}`,
+        title: document.title || slug,
+      });
+      setIsTracked(true);
+    }
 
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          let rawData: ViewResponse | { error: string };
-          rawData = await response.json();
-          const data = ViewResponseSchema.parse(rawData);
-          setViews(data.views);
-        } else {
-          const response = await fetch(
-            `/api/views?slug=${encodeURIComponent(slug)}`,
-            {
-              method: "GET",
-            },
-          );
+    // Simulate a brief loading state for better UX
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 500);
 
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          let rawData: ViewResponse | { error: string };
-          rawData = await response.json();
-          const data = ViewResponseSchema.parse(rawData);
-          setViews(data.views);
-        }
-      } catch (error) {
-        console.error("Error fetching views:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    return () => clearTimeout(timer);
+  }, [slug, trackView, isTracked]);
 
-    fetchViews();
-  }, [slug, trackView]);
-
-  if (loading) {
-    return displayViews ? (
-      <p className={className}>{"... views"}</p>
-    ) : (
-      <p className={className}>{"..."}</p>
-    );
+  if (!displayViews) {
+    return null;
   }
 
-  return displayViews ? (
-    <p
-      className={className}
-    >{`${Number(views).toLocaleString("en-US")} views`}</p>
-  ) : (
-    <p className={className}>{`${Number(views).toLocaleString("en-US")}`}</p>
+  if (loading) {
+    return <p className={className}>{"... views"}</p>;
+  }
+
+  return (
+    <p className={className}>
+      {"View tracked"}
+    </p>
   );
 }
