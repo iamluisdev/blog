@@ -7,7 +7,6 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Footer } from "@/components/footer";
 import { BASE_URL } from "@/lib/constants";
 import { Header } from "@/components/header";
-import { GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -62,7 +61,6 @@ export default function RootLayout({
         GeistMono.variable,
       )}
     >
-      <GoogleAnalytics gaId={process.env.GOOGLE_ANALYTICS_ID!} />
       <body className="antialiased max-w-xl mx-4 sm:mx-auto">
         <Header />
         <main className="flex-auto min-w-0 my-6 flex flex-col px-2 md:px-0">
